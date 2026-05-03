@@ -2,9 +2,7 @@ package com.universidad.seguridad.controller;
 
 import com.universidad.seguridad.model.Usuario;
 import com.universidad.seguridad.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,8 +15,11 @@ import jakarta.validation.Valid;
 @Controller
 public class AuthController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
+
+    public AuthController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
     @GetMapping("/")
     public String index(Authentication authentication) {
